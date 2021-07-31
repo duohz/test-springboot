@@ -16,7 +16,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class AutoLogAspect {
-    private static final String POINT_CUT_PATH = "execution(* com.example.demo.controller.MainController.*(..))";
+    /**
+     * 切片路径
+     * 方法类型 返回类型 包.类.方法
+     * ..表示遍历子包
+     * *表示包下所有类|类下所有方法
+     * (..)表示任意入参
+     */
+    private static final String POINT_CUT_PATH = "execution(* com.example.demo..*(..))";
 
     @Before(POINT_CUT_PATH)
     public void logBefore(JoinPoint joinPoint) {
