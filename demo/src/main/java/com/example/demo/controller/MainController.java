@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.entity.CommonLog;
+import com.example.demo.exam.SpringRollBack;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
 
 /**
  * @Desc
@@ -14,9 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("main")
 public class MainController {
 
+    @Autowired
+    private SpringRollBack springRollBack;
+
     @GetMapping("/login")
     @ResponseBody
-    public String login() {
+    @Transactional(rollbackOn = Throwable.class)
+    public String login(@RequestParam String userId, @RequestParam String userName) throws Exception {
+        CommonLog commonLog = CommonLog.builder().userId(userId).userName(userName).build();
+        springRollBack.testA(commonLog);
         return "login in!";
     }
 }
