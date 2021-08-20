@@ -5,6 +5,9 @@ import com.example.demo.service.CommonLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 /**
  * @Desc spring嵌套回滚测试
  * 如果内外层方法使用了@Transaction(rollbackOn=Exception.class)注解
@@ -44,6 +47,7 @@ public class SpringRollBack {
     @Autowired
     private CommonLogService commonLogService;
 
+    @Transactional(rollbackOn = Throwable.class)
     public void testA(CommonLog commonLog) throws Exception {
         commonLogService.saveCommonLog(commonLog);
         testB();
@@ -55,5 +59,13 @@ public class SpringRollBack {
 
     public void testC() throws Exception {
         throw new Exception("testC throws exception!");
+    }
+
+    public void saveCommonLog(CommonLog commonLog) {
+        commonLogService.saveCommonLog(commonLog);
+    }
+
+    public List<CommonLog> queryLogs() {
+        return commonLogService.queryAll();
     }
 }

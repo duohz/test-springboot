@@ -5,6 +5,8 @@ import com.example.demo.mapper.CommonLogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Desc
  * @Author zhoud
@@ -17,5 +19,9 @@ public class CommonLogService {
 
     public void saveCommonLog(CommonLog commonLog) {
         commonLogMapper.saveCommonLog(commonLog);
+    }
+
+    public List<CommonLog> queryAll() {
+        return commonLogMapper.queryAll();
     }
 }

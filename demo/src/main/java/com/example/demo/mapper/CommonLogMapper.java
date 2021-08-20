@@ -3,6 +3,8 @@ package com.example.demo.mapper;
 import com.example.demo.entity.CommonLog;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @Desc
  * @Author zhoud
@@ -11,4 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CommonLogMapper {
     void saveCommonLog(CommonLog commonLog);
+
+    List<CommonLog> queryAll();
 }
