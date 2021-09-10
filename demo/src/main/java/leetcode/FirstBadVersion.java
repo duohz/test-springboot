@@ -1,4 +1,6 @@
-package com.example.rpctest.leetcode;
+package leetcode;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Author ex-zhoud002
